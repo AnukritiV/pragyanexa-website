@@ -224,8 +224,8 @@
             <label>Name<input type="text" name="name" placeholder="Your name" required></label>
             <label>Company<input type="text" name="company" placeholder="Company name"></label>
           </div>
-          <label>Phone Number<input type="tel" name="phone" placeholder="+91 98765 43210" required></label>
-          <label>Email<input type="email" name="email" placeholder="you@company.com" required></label>
+          <label>Phone Number<input type="tel" name="phone" placeholder="+91 9876543210" pattern="^\+[1-9][0-9]{7,14}$" title="Enter a valid phone number with country code, for example +919876543210" required></label>
+          <label>Email<input type="email" name="email" placeholder="you@company.com" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Enter a valid email address, for example name@company.com" required></label>
           <label>What can we help with?
             <select name="service">
               <option>Website Development</option>
@@ -279,5 +279,22 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+  const phoneInput = document.getElementById("phone");
+
+  phoneInput.addEventListener("input", function () {
+    let value = this.value;
+
+    // Remove everything except numbers and +
+    value = value.replace(/[^\d+]/g, "");
+
+    // Allow + only as the first character
+    if (value.includes("+")) {
+      value = "+" + value.replace(/\+/g, "");
+    }
+
+    this.value = value;
+  });
+  </script>
 </body>
 </html>
