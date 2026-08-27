@@ -15,3 +15,16 @@ document.querySelectorAll('.nav a').forEach(link => {
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+
+
+// Reliable Back to Top behavior
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+  backToTop.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    if (history.replaceState) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  });
+}
